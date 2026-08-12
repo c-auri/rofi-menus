@@ -1,20 +1,36 @@
 # Rofi Menus
 
-[Rofi](https://github.com/davatorium/rofi) is a window switcher and application launcher for Linux that can also act as a generic searchable menu over any list of options. This repo builds three rofi-powered tools for use in my desktop environment: an app launcher, an emoji picker, and a power menu. Each one is a standalone script, intended to be bound to a keyboard shortcut in whatever window manager runs it.
+[Rofi](https://github.com/davatorium/rofi) is a window switcher and application launcher for Linux that doubles as a searchable menu over any list of options. This repo uses it to build:
+
+- **App launcher**: starts installed applications
+- **Emoji picker**: searches from a list of emojis and types the selection into the focused window
+- **Power menu**: offers lockscreen, shut down, reboot, log out, suspend, and hibernate
+
+They are intended to be mapped to global keyboard shortcuts by the system's window manager.
 
 ## Installation
 
-The tools are location-independent: each script resolves its own directory via `readlink -f "$0"`, and the `.rasi` files import each other by relative path. Clone or place this directory anywhere, then symlink the three entry points onto `PATH`:
-
+Clone or place this repository anywhere, then symlink the three entry points into a directory on your `PATH`:
 ```bash
 ln -sf <dir>/launcher/launcher.sh   ~/.local/bin/rofi-launcher
 ln -sf <dir>/emoji/picker.sh        ~/.local/bin/rofi-emoji
 ln -sf <dir>/powermenu/powermenu.sh ~/.local/bin/rofi-powermenu
 ```
-
 Callers invoke the bare names, so nothing outside this repo hardcodes its location.
 
-Requires `rofi` (developed against 1.7.1). The emoji picker additionally needs `xdotool` and `xclip`. The power menu needs `systemctl` and `loginctl`, plus a lock script named by the `LOCKSCREEN_CMD` environment variable; see `powermenu/README.md`, which also covers overriding the log-out command for a given window manager.
+Then point `LOCKSCREEN_CMD` at a script that locks the display, somewhere the graphical session sources rather than a shell rc file:
+```bash
+# ~/.profile
+export LOCKSCREEN_CMD=my-lock-script
+```
+
+Without it the power menu leaves out Lock, Suspend, and Hibernate rather than offering actions that would fail. See `powermenu/README.md`, which also covers overriding the log-out command for a given window manager.
+
+Requires:
+
+- `rofi` for all three, developed against 1.7.1
+- `xdotool`, `xclip` for the emoji picker, to type the selection and copy it
+- `systemctl`, `loginctl` for the power menu, for the system and session actions
 
 ## Shared Design
 
