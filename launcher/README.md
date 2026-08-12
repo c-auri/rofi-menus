@@ -13,7 +13,7 @@ launcher/
 ## Behavior
 
 - Opens `rofi -show drun` — `.desktop` apps only, no run/filebrowser/window modes
-- Case-insensitive fuzzy search
+- Case-insensitive substring search, tokenized: each whitespace-separated term must appear somewhere in the row (rofi's default `matching: normal`)
 - Display format: app name + generic category in small italic, e.g. `Firefox [Web Browser]`
 - App icons shown at 20 px using the Papirus icon theme
 - Arrow keys and mouse for selection; Enter to launch; Escape closes without launching

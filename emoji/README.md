@@ -14,7 +14,8 @@ emoji/
 ## Behavior
 
 - Opens rofi in `-dmenu` mode — searchable list, not an app launcher
-- Case-insensitive fuzzy search across both the short name and the full Unicode name
+- Case-insensitive substring search across both the short name and the full Unicode name (rofi's default `matching: normal`; nothing here enables `-matching fuzzy`)
+- Matches are ranked with rofi's fzf scorer (`-sort -sorting-method fzf`), which reorders rows that already matched rather than widening what matches
 - Short-name matches always rank above full-name matches; see the ranking design decision below
 - Only listed entries can be selected (`-no-custom`); freeform text is not accepted
 - Selected emoji is copied to the X clipboard (`xclip -selection clipboard`)

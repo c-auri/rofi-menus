@@ -1,6 +1,6 @@
 # Rofi Menus
 
-[Rofi](https://github.com/davatorium/rofi) is a window switcher and application launcher for Linux that can also act as a generic fuzzy-search menu. This repo builds three rofi-powered tools for use in my desktop environment: an app launcher, an emoji picker, and a power menu. Each one is a standalone script, intended to be bound to a keyboard shortcut in whatever window manager runs it.
+[Rofi](https://github.com/davatorium/rofi) is a window switcher and application launcher for Linux that can also act as a generic searchable menu over any list of options. This repo builds three rofi-powered tools for use in my desktop environment: an app launcher, an emoji picker, and a power menu. Each one is a standalone script, intended to be bound to a keyboard shortcut in whatever window manager runs it.
 
 ## Installation
 
@@ -14,7 +14,7 @@ ln -sf <dir>/powermenu/powermenu.sh ~/.local/bin/rofi-powermenu
 
 Callers invoke the bare names, so nothing outside this repo hardcodes its location.
 
-Requires `rofi` (developed against 1.7.1). The emoji picker additionally needs `xdotool` and `xclip`. The power menu needs `systemctl`, `awesome-client`, and a lock script named by the `LOCKSCREEN_CMD` environment variable; see `powermenu/README.md` for how to set it.
+Requires `rofi` (developed against 1.7.1). The emoji picker additionally needs `xdotool` and `xclip`. The power menu needs `systemctl` and `loginctl`, plus a lock script named by the `LOCKSCREEN_CMD` environment variable; see `powermenu/README.md`, which also covers overriding the log-out command for a given window manager.
 
 ## Shared Design
 

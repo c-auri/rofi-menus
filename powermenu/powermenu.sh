@@ -13,19 +13,39 @@ lock_available() {
     [ -n "$LOCKSCREEN_CMD" ] && command -v -- "$LOCKSCREEN_CMD" >/dev/null 2>&1
 }
 
+# Logging out does get a default, because ending the session through systemd
+# assumes nothing beyond the systemctl dependency the other actions already
+# carry. $LOGOUT_CMD overrides it with a window manager's own quit, and unlike
+# the locker it is a shell command rather than a single executable, since
+# every such quit takes arguments: awesome-client 'awesome.quit()', i3-msg
+# exit, swaymsg exit...
+#
+# The session is resolved when the action runs rather than read from
+# $XDG_SESSION_ID, which goes stale across a session restart and would then
+# name a closed session while the live one keeps running.
+logout="$LOGOUT_CMD"
+if [ -z "$logout" ]
+then
+    logout='loginctl terminate-session "$(loginctl show-user "$USER" -p Display --value)"'
+fi
+
+logout_available() {
+    command -v -- "${logout%% *}" >/dev/null 2>&1
+}
+
 # No group separators: rofi 1.7.1's listview ignores per-row vertical
 # margin/padding/border (verified with `fixed-height: false` and a debug bg
 # color via `element normal.urgent`), and `nonselectable` rows are still
 # walked by arrow navigation. Flat list is the available trade-off.
 #
-# The three actions that lock are omitted entirely when no locker is
-# configured, rather than offered and then refused.
+# An action whose command is not configured or not resolvable is omitted
+# entirely, rather than offered and then refused.
 main_menu() {
     printf '\0prompt\x1f❯\n'
     lock_available && printf 'Lock\n'
     printf 'Shut down\n'
     printf 'Reboot\n'
-    printf 'Log out\n'
+    logout_available && printf 'Log out\n'
     lock_available && printf 'Suspend\nHibernate\n'
 
     return 0
@@ -36,9 +56,9 @@ confirm_menu() {
     printf '%s\0info\x1fconfirm:%s\n' "$1" "$1"
 }
 
-# The guards are unreachable through the menu, which never offers these
-# actions without a locker. They cover the locker disappearing mid-session,
-# where the alternative is sleeping an unlocked display.
+# The guards are unreachable through the menu, which never offers an action
+# whose command is missing. They cover it disappearing mid-session, where for
+# Suspend the alternative is sleeping an unlocked display.
 run_action() {
     case "$1" in
         "Lock")       lock_available || return; "$LOCKSCREEN_CMD" ;;
@@ -47,7 +67,7 @@ run_action() {
         "Hibernate")  lock_available || return; "$LOCKSCREEN_CMD" & sleep 0.5; systemctl hibernate ;;
         "Shut down")  systemctl poweroff ;;
         "Reboot")     systemctl reboot ;;
-        "Log out")    awesome-client 'awesome.quit()' ;;
+        "Log out")    logout_available || return; sh -c "$logout" ;;
     esac
 }
 

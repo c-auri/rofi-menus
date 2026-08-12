@@ -17,9 +17,25 @@ Lock, Suspend, and Hibernate need a lock script. There is no default: point `LOC
 export LOCKSCREEN_CMD="$HOME/path/to/lock.sh"
 ```
 
-Set it somewhere the graphical session sources, such as `~/.profile`, rather than `~/.bashrc`; the menu inherits its environment from the session, not from a terminal. A change takes effect on the next login, not on an AwesomeWM restart.
+Set it somewhere the graphical session sources, such as `~/.profile`, rather than `~/.bashrc`; the menu inherits its environment from the session, not from a terminal. A change takes effect on the next login, not on a window manager restart.
 
-If `LOCKSCREEN_CMD` is unset or does not resolve to an executable, Lock, Suspend, and Hibernate are left out of the menu entirely; the menu shows Shut down, Reboot, and Log out, which need no locker. Nothing is offered that would then fail, and the machine can never sleep with an unlocked display because of a missing setting.
+If `LOCKSCREEN_CMD` is unset or does not resolve to an executable, Lock, Suspend, and Hibernate are left out of the menu entirely. Nothing is offered that would then fail, and the machine can never sleep with an unlocked display because of a missing setting.
+
+Log out needs no configuration. It defaults to ending the session through systemd, which the menu already depends on for Shut down and Reboot:
+
+```sh
+loginctl terminate-session "$(loginctl show-user "$USER" -p Display --value)"
+```
+
+The session is looked up when the action runs rather than taken from `$XDG_SESSION_ID`, because that variable goes stale across a session restart and would then name a closed session while the live one keeps running.
+
+Set `LOGOUT_CMD` to override it with the window manager's own quit. Unlike `LOCKSCREEN_CMD`, it is a shell command rather than a single executable, since these all take arguments:
+
+```bash
+export LOGOUT_CMD="awesome-client 'awesome.quit()'"   # or: i3-msg exit, swaymsg exit, bspc quit
+```
+
+Log out drops out of the menu only if the command's first word cannot be resolved, which on a systemd machine means never.
 
 Lock executes immediately. Every other action prompts for confirmation in the same rofi window — the action name itself is the confirm choice; cancel returns to the main menu. Suspend and Hibernate run the lockscreen first so the display is locked before the system sleeps.
 
