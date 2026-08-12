@@ -1,6 +1,6 @@
 # App Launcher
 
-**Trigger:** `Meta + Return` — opens a searchable list of installed desktop apps.
+Opens a searchable list of installed desktop apps.
 
 ## Files
 
@@ -44,7 +44,7 @@ launcher/
 
 ## Testing
 
-- Press `Meta + Return`: rofi opens fullscreen
+- Run `launcher.sh`: rofi opens fullscreen
 - Type a partial app name (e.g. `fire`): list filters to matching apps case-insensitively
 - Navigate with `↑`/`↓`: selection highlight moves
 - Press `Enter` on an app: app launches; rofi closes

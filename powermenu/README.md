@@ -9,8 +9,6 @@ Rofi-based menu for session and system actions:
 - suspend
 - hibernate 
 
-AwesomeWM calls it via keybinding in `rc.lua`.
-
 ## Configuration
 
 Lock, Suspend, and Hibernate need a lock script. There is no default: point `LOCKSCREEN_CMD` at an executable that locks the display and blocks until unlocked. Either an absolute path or the name of a command on `PATH` works.

@@ -1,6 +1,6 @@
 # Emoji Picker
 
-**Trigger:** `Meta + .` — opens a searchable emoji list; selected emoji is typed into the previously focused window and copied to the clipboard.
+Opens a searchable emoji list; the selected emoji is typed into the previously focused window and copied to the clipboard.
 
 ## Files
 
@@ -90,7 +90,7 @@ Meta works because rofi consults it only when the visible row text fails to matc
 
 ## Testing
 
-- Press `Meta + .`: rofi opens fullscreen showing the emoji list
+- Run `picker.sh`: rofi opens fullscreen showing the emoji list
 - Type `joy`: list filters to entries containing "joy"
 - Type `JOY`: same results (case-insensitive)
 - Type part of a full Unicode name (e.g. `tears`): entries whose full name contains "tears" appear

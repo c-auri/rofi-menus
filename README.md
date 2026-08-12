@@ -1,6 +1,6 @@
 # Rofi Menus
 
-[Rofi](https://github.com/davatorium/rofi) is a window switcher and application launcher for Linux that can also act as a generic fuzzy-search menu. This repo builds three rofi-powered tools for use in my desktop environment: an app launcher, an emoji picker, and a power menu. All three are triggered via keyboard shortcuts defined in `~/.config/awesome/rc.lua`.
+[Rofi](https://github.com/davatorium/rofi) is a window switcher and application launcher for Linux that can also act as a generic fuzzy-search menu. This repo builds three rofi-powered tools for use in my desktop environment: an app launcher, an emoji picker, and a power menu. Each one is a standalone script, intended to be bound to a keyboard shortcut in whatever window manager runs it.
 
 ## Installation
 
