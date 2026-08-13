@@ -2,9 +2,9 @@
 
 [Rofi](https://github.com/davatorium/rofi) is a window switcher and application launcher for Linux that doubles as a searchable menu over any list of options. This repo uses it to build:
 
-- **App launcher**: starts installed applications
-- **Emoji picker**: searches from a list of emojis and types the selection into the focused window
-- **Power menu**: offers lockscreen, shut down, reboot, log out, suspend, and hibernate
+- **[App launcher](launcher/README.md)**: starts installed applications
+- **[Emoji picker](emoji/README.md)**: searches from a list of emojis and types the selection into the focused window
+- **[Power menu](powermenu/README.md)**: offers lockscreen, shut down, reboot, log out, suspend, and hibernate
 
 They are intended to be mapped to global keyboard shortcuts by the system's window manager.
 
