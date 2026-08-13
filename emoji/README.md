@@ -5,7 +5,7 @@
 ## Files
 
 ```
-~/.config/rofi/emoji/
+emoji/
 ├── picker.sh      # entry point
 ├── emojis.txt     # static hand-curated emoji list; edit directly to add or remove entries
 └── style.rasi     # emoji-specific overrides atop shared-style.rasi

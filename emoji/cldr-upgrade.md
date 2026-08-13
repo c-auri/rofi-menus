@@ -61,7 +61,7 @@ Bad: no quality ranking whatsoever inside tier 2. A query like `face` returns 14
 
 ## Option B: a rofi mode plugin
 
-Replace the dmenu invocation with a custom mode in C, loaded from `~/.config/rofi/emoji/` via `ROFI_PLUGIN_PATH` (honoured in 1.7.1 at `source/rofi.c:580`; the `-plugin-path` flag is deprecated, the environment variable is not).
+Replace the dmenu invocation with a custom mode in C, loaded from this directory via `ROFI_PLUGIN_PATH` (honoured in 1.7.1 at `source/rofi.c:580`; the `-plugin-path` flag is deprecated, the environment variable is not).
 
 The plugin owns ranking outright: it re-sorts its records against the query in `_preprocess_input`, runs with `-no-sort`, and rofi renders that order. Tiers become arbitrary, match quality within a tier becomes expressible, and `_get_display_value` is free to render the dimmed parenthetical again since it no longer feeds the scorer.
 

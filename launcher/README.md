@@ -5,7 +5,7 @@
 ## Files
 
 ```
-~/.config/rofi/launcher/
+launcher/
 ├── launcher.sh    # entry point: rofi -show drun -theme launcher/style.rasi
 └── style.rasi     # launcher-specific overrides atop shared-style.rasi
 ```
