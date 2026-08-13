@@ -39,7 +39,7 @@ entry {
 
 listview {
     columns:          1;
-    lines: 12;
+    lines:            12;
     scrollbar:        false;
     background-color: transparent;
     spacing:          2px;
