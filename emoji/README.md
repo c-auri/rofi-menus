@@ -83,7 +83,7 @@ Meta works because rofi consults it only when the visible row text fails to matc
 
 **Static `emojis.txt`, no generator script.** The file is hand-curated with short names chosen for searchability (e.g. `joy` instead of `face with tears of joy`). Regenerating from `unicodedata` would overwrite those short names.
 
-**Focused window captured before rofi opens.** At the moment `awful.spawn.with_shell` fires, the previous window is still active. By the time `picker.sh` reaches `xdotool getactivewindow`, that window is still focused. This is reliable because AwesomeWM's keybinding handler hasn't transferred focus yet.
+**Focused window captured before rofi opens.** A window manager spawns the picker from its keybinding handler without moving focus, so the window that was active when the shortcut fired is still active when `picker.sh` reaches `xdotool getactivewindow`. Focus changes only once rofi maps its own window, which happens later.
 
 **`-no-custom` prevents freeform input.** Only an entry from the list can be submitted. This avoids accidental garbage being typed or copied if the user misses a selection.
 

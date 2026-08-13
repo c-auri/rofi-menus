@@ -67,7 +67,7 @@ The plugin owns ranking outright: it re-sorts its records against the query in `
 
 Good: it is the only design that gets the visible parenthetical back and the only one that can rank keyword matches by quality. The theme, the keybinding, and `shared-style.rasi` are all untouched.
 
-Bad: it is C, which `dedev/scripting-conventions.md` places outside the defaults and requires a reason for. It needs a build step, which the same document advises against. rofi 1.7.1 declares `ABI_VERSION 6u` and refuses to load a plugin built against another version, so a distro upgrade breaks the picker until it is rebuilt. Keep `emojis.txt` and a dmenu code path in `picker.sh` as a fallback for that morning.
+Bad: it is C, which steps outside the sh, bash, awk and Python that everything else here is written in, and it needs a build step where nothing else in this repo has one. rofi 1.7.1 declares `ABI_VERSION 6u` and refuses to load a plugin built against another version, so a distro upgrade breaks the picker until it is rebuilt. Keep `emojis.txt` and a dmenu code path in `picker.sh` as a fallback for that morning.
 
 ## Recommendation: stage it
 
