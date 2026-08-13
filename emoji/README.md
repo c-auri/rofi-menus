@@ -106,3 +106,9 @@ Meta works because rofi consults it only when the visible row text fails to matc
 - Each row shows emoji glyph + one name, with no parenthetical and no dimmed text
 - Scrolling is continuous, not page-jumping
 - Colors match the launcher exactly
+
+## Attribution
+
+The full names in `emojis.txt`, the ones moved into rofi's meta field, are Unicode character names taken from the Unicode Character Database, published by Unicode, Inc. under the [Unicode License](https://www.unicode.org/license.txt). The short names are hand-curated and fall under this repo's MIT license with everything else.
+
+If the keyword sync described in `cldr-upgrade.md` is ever implemented, the CLDR annotation data it vendors is published under the same license and this section needs to name it too.

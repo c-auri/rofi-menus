@@ -63,3 +63,7 @@ All imports are relative to the importing file, so the tree can be relocated as 
 
 > [!Note] 
 > Any edit to `shared-style.rasi` or `kanagawa-dragon.rasi` should be followed by opening all three tools to confirm none regressed visually.
+
+## License
+
+MIT, see [LICENSE](LICENSE). The full emoji names in `emojis.txt` come from Unicode data under a separate license; see [emoji/README.md](emoji/README.md#attribution).
